@@ -1,4 +1,8 @@
+let computerScore = 0;
+let humanScore = 0;
+
 function getComputerChoice() {
+    let computerChoice;
     const randomNumber = Math.floor(Math.random() * 3);
     if (randomNumber === 0) {
         computerChoice = "rock";
@@ -32,8 +36,45 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-let computerScore;
-let humanScore;
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        alert("It's a tie!");
+    }
+    else if (humanChoice === "rock") {
+        if (computerChoice === "scissors") {
+            humanScore++;
+            alert("You chose rock and opponnt chose scissors: You win!");
+        }
+        else {
+            computerScore++;
+            alert("You chose rock and opponent chose paper: You lose.")
+        }
+    }
+    else if (humanChoice === "paper") {
+        if (computerChoice === "scissors") {
+            computerScore++;
+            alert("You chose paper and opponnt chose scissors: You lose.");
+        }
+        else {
+            humanScore++;
+            alert("You chose paper and opponent chose rock: You win!")
+        }
+    }
+    else if (humanChoice === "scissors") {
+        if (computerChoice === "paper") {
+            humanScore++;
+            alert("You chose scissors and opponnt chose paper: You win!");
+        }
+        else {
+            computerScore++;
+            alert("You chose scissors and opponent chose rock: You lose.")
+        }
+    }
+}
 
-console.log(getComputerChoice());
-console.log(getHumanChoice());
+let computerChoice = getComputerChoice();
+let humanChoice = getHumanChoice();
+
+playRound(humanChoice, computerChoice);
+console.log(`Your score is: ${humanScore}`);
+console.log(`Your opponent's score is: ${computerScore}`);
