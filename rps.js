@@ -32,5 +32,8 @@ function getHumanChoice() {
     return humanChoice;
 }
 
+let computerScore;
+let humanScore;
+
 console.log(getComputerChoice());
 console.log(getHumanChoice());
