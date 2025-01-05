@@ -1,6 +1,3 @@
-let computerScore = 0;
-let humanScore = 0;
-
 function getComputerChoice() {
     let computerChoice;
     const randomNumber = Math.floor(Math.random() * 3);
@@ -37,44 +34,71 @@ function getHumanChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+    let winner;
     if (humanChoice === computerChoice) {
         alert("It's a tie!");
     }
     else if (humanChoice === "rock") {
         if (computerChoice === "scissors") {
-            humanScore++;
-            alert("You chose rock and opponnt chose scissors: You win!");
+            winner = "human";
+            alert("You chose rock and opponnt chose scissors: You win this round!");
         }
         else {
-            computerScore++;
-            alert("You chose rock and opponent chose paper: You lose.")
+            winner = "computer";
+            alert("You chose rock and opponent chose paper: You lose this round.")
         }
     }
     else if (humanChoice === "paper") {
         if (computerChoice === "scissors") {
-            computerScore++;
-            alert("You chose paper and opponnt chose scissors: You lose.");
+            winner = "computer";
+            alert("You chose paper and opponnt chose scissors: You lose this round.");
         }
         else {
-            humanScore++;
-            alert("You chose paper and opponent chose rock: You win!")
+            winner = "human";
+            alert("You chose paper and opponent chose rock: You win this round!")
         }
     }
     else if (humanChoice === "scissors") {
         if (computerChoice === "paper") {
-            humanScore++;
-            alert("You chose scissors and opponnt chose paper: You win!");
+            winner = "human";
+            alert("You chose scissors and opponnt chose paper: You win this round!");
         }
         else {
-            computerScore++;
-            alert("You chose scissors and opponent chose rock: You lose.")
+            winner = "computer";
+            alert("You chose scissors and opponent chose rock: You lose this round.")
         }
     }
+    return winner;
 }
 
-let computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
+function playGame() {
+    let computerScore = 0;
+    let humanScore = 0;
 
-playRound(humanChoice, computerChoice);
-console.log(`Your score is: ${humanScore}`);
-console.log(`Your opponent's score is: ${computerScore}`);
+    for (gameCount = 0; gameCount < 5; gameCount++) {
+        let computerChoice = getComputerChoice();
+        let humanChoice = getHumanChoice();
+        let roundWinner = playRound(humanChoice, computerChoice);
+        if (roundWinner === "human") {
+            humanScore++;
+        }
+        else if (roundWinner === "computer") {
+            computerScore++;
+        }
+    }
+    
+    console.log(`Final score \n You: ${humanScore} \n Opponent: ${computerScore}`)
+
+    if (computerScore === humanScore) {
+        console.log("The game a tie.")
+    }
+    else if (computerScore > humanScore) {
+        console.log("Your opponent won.")
+    }
+    else {
+        console.log("You won!")
+    }
+
+}
+
+playGame();
